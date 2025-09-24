@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+*.mypy_cache/
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# OS-specific
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Uvicorn / FastAPI
+*.log
+
+# Other
+*.env
