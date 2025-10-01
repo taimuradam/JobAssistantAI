@@ -1,12 +1,13 @@
-#TO DO: First thing is finish parse() in parse_text by seperating
-#The raw text has been cleaned, now you need to make the dictionary format and send it back through FastAPI
-#After that, do the same thing for docx files
+#TO DO: Formatting has been completed
+#NOW: Parse the PDF and seperate into dictionaries
+#Send the dictionaries back through FASTAPI
+
 
 #run it by going into the .venv: source .venv/bin/activate
 #then do: uvicorn app.main:app --reload
 
 from fastapi import FastAPI, UploadFile, File
-from extractors import pdf, docx, parse_text
+from extractors import pdf, parse_text
 
 app = FastAPI()
 
@@ -27,21 +28,20 @@ async def parse_resume(file: UploadFile = File(...)):
     #extracting raw text
     raw_text = filetype_call(extension, data)
 
-    parsed_text = parse_text.parse(raw_text)
+    parsed_text = parse_text.restructure(raw_text)
 
     return {
         "filename": name,
         "extension": extension,
         "content_type": content_type,
         "size_bytes": size,
-        "raw_text": raw_text
+        "raw_text": raw_text,
+        "parsed_text": parsed_text
     }
 
 def filetype_call(extension: str, data: bytes):
 
     if extension == "pdf":
         return pdf.extract_pdf(data)
-    elif extension == "docx":
-        return
     else:
         return

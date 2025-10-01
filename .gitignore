@@ -22,3 +22,6 @@ venv/
 
 # Other
 *.env
+
+#Tests
+tests/
