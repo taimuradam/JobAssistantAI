@@ -3,15 +3,22 @@ import re
 MONTHS = r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*'
 RE_EMAIL = re.compile(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', re.I)
 RE_PHONE = re.compile(r'\b(?:\+?\d[\d\-\s().]{7,}\d)\b')
-RE_URL = re.compile(r'(https?://\S+|www\.\S+|linkedin\.com/\S+|github\.com/\S+)', re.I)
+RE_URL = re.compile(
+    r'(https?://[^\s•]+|www\.[^\s•]+|linkedin\.com/[^\s•]+|github\.com/[^\s•]+)',
+    re.I
+)
 RE_BULLET = re.compile(r'^(\s*)(->|•|-|\*|—|·|○|▪|▸)\s+')
-import re
 
-HEADERS = [
+SUMMARY_HEADERS = {
+    "SUMMARY", "PROFESSIONAL SUMMARY", "CAREER SUMMARY",
+    "PROFILE", "PROFESSIONAL PROFILE", "OBJECTIVE", "ABOUT ME"
+}
+
+HEADERS = SUMMARY_HEADERS | {
     "SUMMARY", "EDUCATION", "EXPERIENCE", "PROJECTS", "SKILLS",
     "CERTIFICATIONS", "AWARDS", "PUBLICATIONS", "LEADERSHIP",
     "PROFESSIONAL EXPERIENCE", "TECHNICAL SKILLS",
-]
+}
 
 RE_HEADER_WORDS = re.compile(
     r'^(?:' + '|'.join(map(re.escape, HEADERS)) + r')\s*:?\s*$',
@@ -110,7 +117,7 @@ def restructure(raw_text:str):
         single_lines.append(cur)
         i = j
 
-    for line in single_lines:
-        print(line)
+    # for line in single_lines:
+    #     print(line)
 
     return single_lines

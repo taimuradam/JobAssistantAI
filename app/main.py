@@ -7,7 +7,7 @@
 #then do: uvicorn app.main:app --reload
 
 from fastapi import FastAPI, UploadFile, File
-from extractors import pdf, parse_text
+from extractors import format_text, pdf, extract_text
 
 app = FastAPI()
 
@@ -27,8 +27,8 @@ async def parse_resume(file: UploadFile = File(...)):
 
     #extracting raw text
     raw_text = filetype_call(extension, data)
-
-    parsed_text = parse_text.restructure(raw_text)
+    parsed_text = format_text.restructure(raw_text)
+    name = extract_text.format(parsed_text)
 
     return {
         "filename": name,
