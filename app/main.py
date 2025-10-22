@@ -1,7 +1,8 @@
-#TO DO: Formatting has been completed
+#TO DO: Formatting has been completed, one error to fix you can find it in RESUME_TAIMUR
 #NOW: Parse the PDF and seperate into dictionaries
 #Send the dictionaries back through FASTAPI
-
+#After completing EDUCATION, start working on frontend for a break from this
+#What is left to parse: Work experience, Courses/Skills/etc.
 
 #run it by going into the .venv: source .venv/bin/activate
 #then do: uvicorn app.main:app --reload
